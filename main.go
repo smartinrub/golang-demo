@@ -47,22 +47,29 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Parse data into Struct
 	data, _ := ioutil.ReadAll(response.Body)
-	fmt.Println(string(data))
 	textBytes := []byte(data)
-
 	cityValues := City{}
 	jsonErr := json.Unmarshal(textBytes, &cityValues)
 	if jsonErr != nil {
 		fmt.Println(jsonErr)
 		return
 	}
-	fmt.Println(cityValues.Name)
 
-	// Read content of html file and returns a Template
-	t, _ := template.ParseFiles("weather.html")
-	// Execute the template, writing the generated HTML to the http.ResponseWriter
-	t.Execute(w, nil)
+	// If city name not found by API
+	if cityValues.Name == "" {
+		t, _ := template.ParseFiles("index.html")
+		errorValue := map[string]interface{}{
+			"error": true,
+		}
+		t.Execute(w, errorValue)
+	} else { // When city was found
+		// Read content of html file and returns a Template
+		t, _ := template.ParseFiles("weather.html")
+		// Execute the template, writing the generated HTML to the http.ResponseWriter
+		t.Execute(w, cityValues)
+	}
 }
 
 // Main
