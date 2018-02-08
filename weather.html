@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Go Weather App</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">{{ .Name }}</h1>
+    </div>
+    <div class="container">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Temperature
+              <span class="badge badge-primary badge-pill">{{ .MainData.Temperature }} ºC</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Min Temperature
+              <span class="badge badge-primary badge-pill">{{ .MainData.TempMin }} ºC</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Max Temperature
+              <span class="badge badge-primary badge-pill">{{ .MainData.TempMax }} ºC</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Humidity
+              <span class="badge badge-primary badge-pill">{{ .MainData.Humidity }} %</span>
+            </li>
+          </ul>
+          <br>
+          <a class="btn btn-primary" href="/" role="button">Back</a>
+    </div>
+    
+</body>
+</html>
