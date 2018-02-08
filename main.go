@@ -9,21 +9,6 @@ import (
 	"net/http"
 )
 
-// Data Structures
-// Weather
-type Data struct {
-	Temperature float32 `json:"temp"`
-	TempMin     float32 `json:"temp_min"`
-	TempMax     float32 `json:"temp_max"`
-	Humidity    float32 `json:"humidity"`
-}
-
-// City Data
-type City struct {
-	Name     string `json:"name"`
-	MainData Data   `json:"main"`
-}
-
 // Handlers
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// Read content of html file and returns a Template
