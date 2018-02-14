@@ -16,7 +16,7 @@ go build main.go
 
 ```sh
 docker build -t golang-demo .
-docker run -p 8080:8080 aa510551e03c
+docker run -p 8080:8080 image_id
 ```
 
 http://localhost:8080
