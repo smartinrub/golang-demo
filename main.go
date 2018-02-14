@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 // Data Structures
@@ -26,10 +27,15 @@ type City struct {
 
 // Handlers
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
+
 	// Read content of html file and returns a Template
 	t, _ := template.ParseFiles("index.html")
 	// Execute the template, writing the generated HTML to the http.ResponseWriter
 	t.Execute(w, nil)
+
+	elapsed := time.Since(start)
+	log.Printf("Weather page took %s", elapsed)
 }
 
 func weatherHandler(w http.ResponseWriter, r *http.Request) {
@@ -39,6 +45,8 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Build url
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?APPID=bd5e378503939ddaee76f12ad7a97608&q=%s&mode=json&units=metric", cityName)
+
+	start := time.Now()
 
 	// Call REST API
 	response, err := http.Get(url)
@@ -70,6 +78,9 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 		// Execute the template, writing the generated HTML to the http.ResponseWriter
 		t.Execute(w, cityValues)
 	}
+
+	elapsed := time.Since(start)
+	log.Printf("Index page took %s", elapsed)
 }
 
 // Main
