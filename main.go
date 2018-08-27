@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 // Data Structures
@@ -36,9 +37,14 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Retrieves value from form
 	cityName := r.FormValue("city")
+	apiKey := os.Getenv("API_ROUNDS")
+
+	if apiKey == "" {
+		apiKey = "f650d6a017adae74d1aba918770e6389"
+	}
 
 	// Build url
-	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?APPID=bd5e378503939ddaee76f12ad7a97608&q=%s&mode=json&units=metric", cityName)
+	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?APPID=%s&q=%s&mode=json&units=metric", apiKey, cityName)
 
 	// Call REST API
 	response, err := http.Get(url)
