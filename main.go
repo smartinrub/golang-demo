@@ -37,7 +37,7 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Retrieves value from form
 	cityName := r.FormValue("city")
-	apiKey := os.Getenv("API_ROUNDS")
+	apiKey := os.Getenv("API_KEY")
 
 	if apiKey == "" {
 		apiKey = "f650d6a017adae74d1aba918770e6389"
